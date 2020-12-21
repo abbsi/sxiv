@@ -470,15 +470,14 @@ void tns_mark(tns_t *tns, int n, bool mark)
 		win_t *win = tns->win;
 		thumb_t *t = &tns->thumbs[n];
 		unsigned long col = win->bg.pixel;
-		int x = t->x + t->w, y = t->y + t->h;
+		int x = t->x, y = t->y + t->h;
 
-		win_draw_rect(win, x - 10, y + 1, 1, tns->bw, true, 1, col);
-		win_draw_rect(win, x + 1, y - 10, tns->bw, 1, true, 1, col);
-
+		win_draw_rect(win, x, y + 5, t->w, tns->bw, true, 1, col);
+		
 		if (mark)
 			col = win->mcol.pixel;
 
-		win_draw_rect(win, x-10, y-10, tns->bw + 12, tns->bw + 12, true, 1, col);
+		win_draw_rect(win, x, y + 5, t->w, tns->bw , true, 1, col);
 
 		if (!mark && n == *tns->sel)
 			tns_highlight(tns, n, true);
